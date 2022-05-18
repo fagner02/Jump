@@ -21,6 +21,18 @@ body.addEventListener("mouseup", (e) => {
   setForceX = (finalPos.x - initialPos.x) / 10;
   setForceY = (finalPos.y - initialPos.y) / 10;
 });
+body.addEventListener("touchstart", (e) => {
+  initialPos.x = e.touches[0].clientX;
+  initialPos.y = e.touches[0].clientY;
+});
+body.addEventListener("touchmove", (e) => {
+  finalPos.x = e.touches[0].clientX;
+  finalPos.y = e.touches[0].clientY;
+});
+body.addEventListener("touchend", (e) => {
+  setForceX = (finalPos.x - initialPos.x) / 10;
+  setForceY = (finalPos.y - initialPos.y) / 10;
+});
 console.log(limitY);
 var i = 0;
 async function loop() {
