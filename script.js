@@ -1,14 +1,20 @@
 var balls = document.querySelectorAll(".ball");
 var body = document.querySelector("body");
+
 var limitX = body.offsetWidth;
 var limitY = body.offsetHeight;
+
 var setForceX = null;
 var setForceY = null;
+
 var initialPos = { x: 0, y: 0 };
+
 var finalPos = { x: 0, y: 0 };
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
 body.addEventListener("mousedown", (e) => {
   initialPos.x = e.clientX;
   initialPos.y = e.clientY;
@@ -21,6 +27,7 @@ body.addEventListener("mouseup", (e) => {
   setForceX = (finalPos.x - initialPos.x) / 10;
   setForceY = (finalPos.y - initialPos.y) / 10;
 });
+
 body.addEventListener("touchstart", (e) => {
   initialPos.x = e.touches[0].clientX;
   initialPos.y = e.touches[0].clientY;
@@ -33,8 +40,7 @@ body.addEventListener("touchend", (e) => {
   setForceX = (finalPos.x - initialPos.x) / 10;
   setForceY = (finalPos.y - initialPos.y) / 10;
 });
-console.log(limitY);
-var i = 0;
+
 async function loop() {
   while (true) {
     update(setForceX, setForceY);
@@ -46,10 +52,10 @@ async function loop() {
       setForceX = setForceX < 0 ? setForceX + 1 : setForceX - 1;
     }
 
-    await sleep(60);
-    i++;
+    await sleep(10);
   }
 }
+
 function update(forceX, forceY) {
   balls.forEach((x) => {
     var height = Number.parseFloat(x.style.top);
