@@ -1,0 +1,14 @@
+body,
+html {
+    background: black;
+    margin: 0;
+    height: 100%;
+}
+
+.ball {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: white;
+    top: 0px;
+}
