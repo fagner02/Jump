@@ -16,8 +16,13 @@ async function loop() {
       forceY += -20;
     }
     update(forceX, forceY);
-    forceY = forceY < 0 ? forceY + 1 : forceY - 1;
-    forceX = forceX < 0 ? forceX + 1 : forceX - 1;
+
+    if (forceY && forceY != 0) {
+      forceY = forceY < 0 ? forceY + 1 : forceY - 1;
+    }
+    if (forceX && forceX != 0) {
+      forceX = forceX < 0 ? forceX + 1 : forceX - 1;
+    }
 
     await sleep(60);
     i++;
