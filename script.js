@@ -2,26 +2,36 @@ var balls = document.querySelectorAll(".ball");
 var body = document.querySelector("body");
 var limitX = body.offsetWidth;
 var limitY = body.offsetHeight;
+var setForceX = null;
+var setForceY = null;
+var initialPos = { x: 0, y: 0 };
+var finalPos = { x: 0, y: 0 };
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+body.addEventListener("mousedown", (e) => {
+  initialPos.x = e.clientX;
+  initialPos.y = e.clientY;
+});
+body.addEventListener("mousemove", (e) => {
+  finalPos.x = e.clientX;
+  finalPos.y = e.clientY;
+});
+body.addEventListener("mouseup", (e) => {
+  setForceX = (finalPos.x - initialPos.x) / 10;
+  setForceY = (finalPos.y - initialPos.y) / 10;
+});
 console.log(limitY);
 var i = 0;
 async function loop() {
-  var forceX = null;
-  var forceY = null;
   while (true) {
-    if (i % 40 == 0) {
-      forceX += 20;
-      forceY += -20;
-    }
-    update(forceX, forceY);
+    update(setForceX, setForceY);
 
-    if (forceY && forceY != 0) {
-      forceY = forceY < 0 ? forceY + 1 : forceY - 1;
+    if (setForceY && setForceY != 0) {
+      setForceY = setForceY < 0 ? setForceY + 1 : setForceY - 1;
     }
-    if (forceX && forceX != 0) {
-      forceX = forceX < 0 ? forceX + 1 : forceX - 1;
+    if (setForceX && setForceX != 0) {
+      setForceX = setForceX < 0 ? setForceX + 1 : setForceX - 1;
     }
 
     await sleep(60);
