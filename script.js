@@ -35,6 +35,10 @@ body.addEventListener("mouseup", (e) => {
   setForceX = (finalPos.x - initialPos.x) / (normalize.x * 10);
   setForceY = (finalPos.y - initialPos.y) / (normalize.y * 10);
 });
+body.addEventListener("mouseleave", () => {
+  setForceX = (finalPos.x - initialPos.x) / (normalize.x * 10);
+  setForceY = (finalPos.y - initialPos.y) / (normalize.y * 10);
+});
 
 body.addEventListener("touchstart", (e) => {
   initialPos.x = e.touches[0].clientX;
@@ -87,6 +91,12 @@ function update(forceX, forceY) {
     }
     if (width + 100 >= limitX) {
       width = limitX - 100;
+    }
+    if (width < 0) {
+      width = 0;
+    }
+    if (height < 0) {
+      height = 0;
     }
     x.style.top = `${height}px`;
     x.style.left = `${width}px`;
