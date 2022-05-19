@@ -1,18 +1,24 @@
 var balls = document.querySelectorAll(".ball");
 var body = document.querySelector("body");
 
+// Define the limits of the screen
 var limitX = body.offsetWidth;
 var limitY = body.offsetHeight;
+// Define the max limit
 var maxLimit = Math.max(limitX, limitY);
+// Define normalization vector
 var normalize = { x: limitX / maxLimit, y: limitY / maxLimit };
 
+// Define force with default values
 var setForceX = 0;
 var setForceY = 0;
 
+// Define positions to calculate the movement
 var initialPos = { x: 0, y: 0 };
 
 var finalPos = { x: 0, y: 0 };
 
+// Define function for waiting
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -43,6 +49,7 @@ body.addEventListener("touchend", (e) => {
   setForceY = (finalPos.y - initialPos.y) / (normalize.y * 10);
 });
 
+// Define function to update forces and call update function
 async function loop() {
   while (true) {
     update(setForceX, setForceY);
@@ -53,7 +60,6 @@ async function loop() {
       setForceY = 0;
     }
 
-    console.log(setForceX);
     if (setForceX > 1 || setForceX < -1) {
       setForceX = setForceX < 0 ? setForceX + 1 : setForceX - 1;
     } else {
@@ -64,6 +70,7 @@ async function loop() {
   }
 }
 
+// Define function to update the position of the balls
 function update(forceX, forceY) {
   balls.forEach((x) => {
     var height = Number.parseFloat(x.style.top);
